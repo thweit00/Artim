@@ -1,0 +1,29 @@
+#######################################
+# Syntax Coloring Map For Artim
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Artim	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+loopBegin	KEYWORD2
+loopEnd	KEYWORD2
+getAvgLoad	KEYWORD2
+getMinLoad	KEYWORD2
+getMaxLoad	KEYWORD2
+getLoadHist	KEYWORD2
+getOverloadHist	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+ARTIM_NUM_HIST	LITERAL1
+
+
