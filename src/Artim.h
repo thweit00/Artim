@@ -26,7 +26,7 @@
 // Current implementation is fixed to 10.
 #define ARTIM_NUM_HIST  (10)
 
-
+///@brief Arduino Runtime Control and Measurement class.
 class Artim {
   private:
     
@@ -79,51 +79,76 @@ class Artim {
 
     // Private operation to calculate load of the last loop.
     // Called at the beginning of each loop (called by loopBegin).
-    void calcStat();
+    void calcStat(void);
 
     // Private operation to calculate the wait time.
     // Called at the end of each loop (called by loopEnd).
-    void calcWait();
+    void calcWait(void);
 
     // Private operation to execute the wait operation (delay)
     // based on the wait time calculated before (called by loopEnd).
-    void waitNow();
+    void waitNow(void);
 
   
   public:
 
     // ------------- public operations -------------
-    // Constructor.
-    // Takes the loop time in ms as input to calculate wait time and load.
+    /// @brief      Constructor.
+    /// @param      loopTime_ms The loop time in ms as input to calculate wait time and load.
     Artim(unsigned int loopTime_ms);
     
-    // loopBegin needs to be invoked as very first operation of the loop.
-    // It takes the start timestamp for load calculation and calculates
-    // the load of the last cycle.
-    void loopBegin();
+    /// @brief      loopBegin needs to be invoked as very first operation of the loop.
+    /// @details    It takes the start timestamp for load calculation and calculates
+    ///             the load of the last cycle.
+    void loopBegin(void);
 
-    // loopEnd needs to be invoked as very last operation of the loop.
-    // It takes the end time stamp for load calculation and triggers
-    // the calculation of the wait time and executes the wait.
-    void loopEnd();
+    /// @brief      loopEnd needs to be invoked as very last operation of the loop.
+    /// @details    It takes the end time stamp for load calculation and triggers
+    ///             the calculation of the wait time and executes the wait.
+    void loopEnd(void);
 
-    // API function that provides the average load in %.
+    /// @brief      API function that provides the average load in %.
+    /// @details    The average load is calculated for the whole power-cycle.
+    /// @return     Average load in %.
     float getAvgLoad(void);
 
-    // API function that provides the minimum load in %.
+    /// @brief      API function that provides the minimum load in %.
+    /// @details    The minimum load observed for one loop execution.
+    ///             The minimum load is calculated for the whole power cycle.
+    /// @return     Minimum load in %.
     float getMinLoad(void);
 
-    // API function that provides the maximum load in %.
+    /// @brief      API function that provides the maximum load in %.
+    /// @details    The maximum load observed for one loop execution.
+    ///             The maximum load is calculated for the whole power cycle.
+    /// @return     Maximum load in %.
     float getMaxLoad(void);
 
-    // API function that provides the histogram data for a range
-    // provided as input parameter.
-    // Valid range: 0... ARTIM_NUM_HIST-1.
-    // In case of input out of range, it returns 0.
+    /// @brief      API function that provides the histogram data for a range
+    ///             provided as input parameter.
+    /// @details    The histogram provides the information about the load distribution
+    ///             during runtime. Each loop execution is considered.\n
+    ///             - Index 0: Number of loop executions with load of 0...9,9%
+    ///             - Index 1: Number of loop executions with load of 10...19,9%
+    ///             - Index 2: Number of loop executions with load of 20...29,9%
+    ///             - Index 3: Number of loop executions with load of 30...39,9%
+    ///             - Index 4: Number of loop executions with load of 40...49,9%
+    ///             - Index 5: Number of loop executions with load of 50...59,9%
+    ///             - Index 6: Number of loop executions with load of 60...69,9%
+    ///             - Index 7: Number of loop executions with load of 70...79,9%
+    ///             - Index 8: Number of loop executions with load of 80...89,9%
+    ///             - Index 9: Number of loop executions with load of 90...99,9%
+    /// @param      rangeIdx Histogram index. Valid range: 0...9.
+    /// @return     Returns the current histogram data for the given index.
+    ///             If the input is out of range, it returns 0.
     unsigned int getLoadHist(byte rangeIdx);
 
-    // API function that provides the overload historgram data.
-    // (number of loops that exceeded the configured loop time)
+    /// @brief      API function that provides the overload historgram data.
+    /// @details    In case the desired loop time is exceeded before loopEnd is called,
+    ///             an overload is detected. The overload will be counted in a separate
+    ///             histogram variable. The function returns the overload count.
+    /// @return     Returns the number of overload events
+    ///             (number of loop executions that exceeded the configured loop time).
     unsigned int getOverloadHist(void);
 };
 

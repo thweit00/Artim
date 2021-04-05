@@ -33,7 +33,7 @@ Artim::Artim(unsigned int loopTime_ms)
 }
 
 
-void Artim::loopBegin()
+void Artim::loopBegin(void)
 {
   // Set the start time for the loop by reading the ms counter.
   this->loopStartTime = millis();
@@ -41,7 +41,7 @@ void Artim::loopBegin()
   this->calcStat();
 }
 
-void Artim::loopEnd()
+void Artim::loopEnd(void)
 {
   // Set the loop end time by reading the ms counter.
   this->loopEndTime = millis();
@@ -55,7 +55,7 @@ void Artim::loopEnd()
 }
 
 
-void Artim::calcStat()
+void Artim::calcStat(void)
 {
   float currentLoad;
   byte histogramIdx;
@@ -111,14 +111,14 @@ void Artim::calcStat()
 }
 
 
-void Artim::calcWait()
+void Artim::calcWait(void)
 {
   // negative wait time means overload.
   this->loopWaitTime = this->loopTime - (this->loopEndTime - this->loopStartTime);
 }
 
 
-void Artim::waitNow()
+void Artim::waitNow(void)
 {
   // Negative value means overflow. We don't wait in that case.
   if (this->loopWaitTime >= 0)
