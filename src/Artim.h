@@ -94,7 +94,7 @@ class Artim {
 
     // ------------- public operations -------------
     /// @brief      Constructor.
-    /// @param      loopTime_ms The loop time in ms as input to calculate wait time and load.
+    /// @param      loopTime_ms Desired loop time in ms as input to calculate wait time and load.
     Artim(unsigned int loopTime_ms);
     
     /// @brief      loopBegin needs to be invoked as very first operation of the loop.
