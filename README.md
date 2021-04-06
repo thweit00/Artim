@@ -4,7 +4,7 @@
 [![Doxygen Action](https://github.com/thweit00/Artim/actions/workflows/doxygen.yml/badge.svg)](https://github.com/thweit00/Artim/actions/workflows/doxygen.yml)
 
 ## Introduction
-The Arduino Runtime Contro and Measurement library is a piece of code for the specific use-case of time discrete execution of the main loop e.g. for time triggered operations. Please check the [Use Case](#use-case) section to see if this use case fits your needs.  
+The Arduino Runtime Control and Measurement library is a piece of code for the specific use-case of time discrete execution of the main loop e.g. for time triggered operations. Please check the [Use Case](#use-case) section to see if this use case fits your needs.  
 In general there are two features supported:
 - Timing Control
 - Load Measurement
