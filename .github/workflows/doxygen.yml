@@ -10,7 +10,8 @@ on:
   pull_request:
     branches: [ main ]
 
-
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,10 +23,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
         
     - name: Doxygen Action
-      uses: mattnotmitt/doxygen-action@v1.1.0
+      uses: mattnotmitt/doxygen-action@vedge
       with:
         # Path to Doxyfile
         doxyfile-path: "./doc/Doxyfile" # default is ./Doxyfile
